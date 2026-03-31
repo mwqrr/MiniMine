@@ -102,7 +102,7 @@ public class Mundo {
 
         motor = new MotorGeracao(semente, registroBiomas);
 
-        if(exec == null || exec.isShutdown()) exec = Executors.newFixedThreadPool(8);
+        if(exec == null || exec.isShutdown()) exec = Executors.newFixedThreadPool(Math.max(1, Runtime.getRuntime().availableProcessors()));
     }
 
     // chamado em render

@@ -270,7 +270,7 @@ public class Config implements Screen, InputProcessor {
 				prefs.putBoolean("debug", UI.debug);
 				prefs.putInteger("botoesTam", UI.botoesTam);
                 prefs.flush();
-                Inicio.defTela(Cenas.menu);
+                Inicio.defTela(Cenas.obterMenu());
             }
         };
         Botao botaoVoltar = new Botao("VOLTAR", visualBotao, fonteTexto, 0, 0, 200, 60, escalaPixel, acaoVoltar);

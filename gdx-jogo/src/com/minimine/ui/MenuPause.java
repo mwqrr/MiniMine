@@ -77,7 +77,7 @@ public class MenuPause {
 				public void exec() {
 					salvarJogo();
 					fecharMenu();
-					Inicio.defTela(Cenas.menu);
+					Inicio.defTela(Cenas.obterMenu());
 				}
 			});
         painelMenu.addAncorado(botaoSair, Ancora.INFERIOR_CENTRO, 0, 0);

@@ -42,7 +42,7 @@ public class Inicio extends Game {
 		Musicas.iniciar();
 		Texturas.iniciar();
 		
-		defTela(Cenas.intro);
+		defTela(Cenas.obterIntro());
 	}
 
 	public static void defTela(Screen tela) {

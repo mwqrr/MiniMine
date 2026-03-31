@@ -53,10 +53,11 @@ public class Sistema {
                 cache.setData(Uri.parse("package:" + ctx.getPackageName()));
                 ctx.startActivityForResult(cache, 1);
             }
-        } else {
+        } else if(Build.VERSION.SDK_INT >= 23) {
             if(ctx.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 ctx.requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
             }
         }
+		// API < 23: permissões concedidas na instalação, não precisa pedir
     }
 }

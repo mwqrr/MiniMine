@@ -30,6 +30,11 @@ public class MainActivity extends AndroidApplication {
 		if(apk.exists()) apk.delete();
         
         AndroidApplicationConfiguration cfg = new AndroidApplicationConfiguration();
+		cfg.useAccelerometer = false;
+		cfg.useCompass = false;
+		cfg.useGyroscope = false;
+		cfg.numSamples = 0;
+		cfg.r = 5; cfg.g = 6; cfg.b = 5; cfg.a = 0; // RGB565 economiza memória de framebuffer
         
         initialize(new Inicio(Sistema.externo, new DebugadorDoAndroid(), new InstaladorAndroid(this)), cfg);
     }

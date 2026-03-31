@@ -7,8 +7,8 @@
 		<uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"/>
 		<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 		<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-		<uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
-		<uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+		<uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" android:maxSdkVersion="99"/>
+		<uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" android:maxSdkVersion="99"/>
 			
     <application android:icon="@drawable/minimine" android:roundIcon="@drawable/minimine" android:label="@string/app_nome" android:screenOrientation="landscape" android:largeHeap="true" android:name=".Crash" android:allowAudioPlaybackCapture="true" android:debuggable="false">
         <activity android:name=".MainActivity" android:label="@string/app_nome">

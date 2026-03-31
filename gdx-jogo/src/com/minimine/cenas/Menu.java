@@ -165,7 +165,7 @@ public class Menu implements Screen, InputProcessor {
 
         Acao acaoJogar = new Acao() {
             public void exec() {
-                Inicio.defTela(Cenas.selecao);
+                Inicio.defTela(Cenas.obterSelecao());
             }
         };
         Botao botaoJogar = new Botao("Um Jogador", visualBotao, fonte, 0, 0, larguraBotao, alturaBotao, escalaPixel, acaoJogar);
@@ -173,7 +173,7 @@ public class Menu implements Screen, InputProcessor {
 
         Acao acaoConfig = new Acao() {
             public void exec() {
-                Inicio.defTela(Cenas.configuracoes);
+                Inicio.defTela(Cenas.obterConfiguracoes());
             }
         };
         Botao botaoConfig = new Botao("Configuracoes", visualBotao, fonte, 0, 0, larguraBotao, alturaBotao, escalaPixel, acaoConfig);

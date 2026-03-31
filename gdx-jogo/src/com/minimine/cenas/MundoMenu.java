@@ -194,7 +194,7 @@ public class MundoMenu implements Screen, InputProcessor {
                         if(mundoEscolhido) return;
                         Mundo.nome = nomeMundo;
                         mundoEscolhido = true;
-                        Inicio.defTela(Cenas.jogo);
+                        Inicio.defTela(Cenas.obterJogo());
                     }
                 };
                 ItemBotao botaoJogar = new ItemBotao(
@@ -241,7 +241,7 @@ public class MundoMenu implements Screen, InputProcessor {
 
         Acao acaoVoltar = new Acao() {
             public void exec() {
-                Inicio.defTela(Cenas.menu);
+                Inicio.defTela(Cenas.obterMenu());
             }
         };
         Botao botaoVoltar = new Botao("VOLTAR", visualBotao, fonteTexto, 0, 0, 200, 60, escalaPixel, acaoVoltar);
@@ -365,7 +365,7 @@ public class MundoMenu implements Screen, InputProcessor {
         dialogoCriar.fechar(false);
         Gdx.input.setOnscreenKeyboardVisible(false);
         mundoEscolhido = true;
-        Inicio.defTela(Cenas.jogo);
+        Inicio.defTela(Cenas.obterJogo());
     }
 
     @Override

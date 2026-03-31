@@ -148,7 +148,7 @@ public class Intro implements Screen {
 			else mensagem = "Carregando";
 
 			if(contagem >= 100) {
-				Inicio.defTela(Cenas.menu);
+				Inicio.defTela(Cenas.obterMenu());
 			}
 		}
 		if(frame2 % 1 == 0) {
