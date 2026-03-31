@@ -131,15 +131,22 @@ public class MundoMenu implements Screen, InputProcessor {
     }
 
     public void criarInterface() {
-        painelPrincipal = new Painel(visualJanela, -400, -350, 800, 700, escalaPixel);
+        float telaV = Gdx.graphics.getWidth();
+        float telaH = Gdx.graphics.getHeight();
+        float largPainel = Math.min(800, telaV - 20);
+        float altPainel = Math.min(700, telaH - 20);
+
+        painelPrincipal = new Painel(visualJanela, -largPainel / 2, -altPainel / 2, largPainel, altPainel, escalaPixel);
         painelPrincipal.defEspaco(20, 30);
 
         Rotulo titulo = new Rotulo("MUNDOS", fonteTitulo, escalaPixel);
-        titulo.largura = 760;
+        titulo.largura = largPainel - 40;
         titulo.altura = 60;
         painelPrincipal.addAncorado(titulo, Ancora.SUPERIOR_CENTRO, 0, 0);
 
-        Painel painelBotoes = new Painel(null, 20, 80, 760, 80, 0);
+        float largInterior = largPainel - 40;
+
+        Painel painelBotoes = new Painel(null, 20, 80, largInterior, 80, 0);
 
         Acao acaoNovoMundo = new Acao() {
             public void exec() {
@@ -147,29 +154,30 @@ public class MundoMenu implements Screen, InputProcessor {
                 abrirDialogoCriar();
             }
         };
-        Botao botaoNovoMundo = new Botao("Novo Mundo", visualBotao, fonteTexto, 0, 0, 400, 70, escalaPixel * 0.8f, acaoNovoMundo);
+        Botao botaoNovoMundo = new Botao("Novo Mundo", visualBotao, fonteTexto, 0, 0, Math.min(400, largInterior - 20), 70, escalaPixel * 0.8f, acaoNovoMundo);
         painelBotoes.addAncorado(botaoNovoMundo, Ancora.SUPERIOR_CENTRO, 0, 0);
         painelPrincipal.add(painelBotoes);
 
         // lista de mundos
-        painelMundos = new PainelRolavel(20, 170, 760, 420);
+        float altLista = altPainel - 280;
+        painelMundos = new PainelRolavel(20, 170, largInterior, altLista);
         painelMundos.defEspaco(0.5f);
 
         if(nomesMundos.isEmpty()) {
             Rotulo mensagemVazia = new Rotulo("Nenhum mundo salvo", fonteTexto, escalaPixel * 0.8f);
             mensagemVazia.x = 5;
             mensagemVazia.y = 5;
-            mensagemVazia.largura = 750;
+            mensagemVazia.largura = largInterior - 10;
             mensagemVazia.altura = 50;
             painelMundos.add(mensagemVazia);
         } else {
             float alturaLinha = 80;
             float espacamento = 6;
-            // larguras das colunas dentro da linha (total = 750)
-            // [nome: 430][jogar: 100][editar: 100][excluir: 100] + margens internas
-            float larguraNome = 430;
-            float larguraBotaoAcao = 100;
-            float margemV = 10; // margem vertical interna do botao dentro da linha
+            // larguras proporcionais
+            float larguraItemTotal = largInterior - 10;
+            float larguraBotaoAcao = Math.min(100, larguraItemTotal * 0.13f);
+            float larguraNome = larguraItemTotal - larguraBotaoAcao * 3 - 15;
+            float margemV = 10;
             float alturaItemInterno = alturaLinha - margemV * 2;
 
             for(int i = 0; i < nomesMundos.size(); i++) {
@@ -177,7 +185,7 @@ public class MundoMenu implements Screen, InputProcessor {
                 final String nomeMundo = Mundo.decodificarNome(nomeArquivo);
 
                 float y = 5 + (i * (alturaLinha + espacamento));
-                ItemLinha linha = new ItemLinha(5, y, 750, alturaLinha, pixelBranco);
+                ItemLinha linha = new ItemLinha(5, y, larguraItemTotal, alturaLinha, pixelBranco);
 
                 // rotulo do nome do mundo, alinhado verticalmente no centro
                 Rotulo rotuloNome = new Rotulo(nomeMundo, fonteTexto, escalaPixel * 0.75f);
@@ -244,7 +252,7 @@ public class MundoMenu implements Screen, InputProcessor {
                 Inicio.defTela(Cenas.obterMenu());
             }
         };
-        Botao botaoVoltar = new Botao("VOLTAR", visualBotao, fonteTexto, 0, 0, 200, 60, escalaPixel, acaoVoltar);
+        Botao botaoVoltar = new Botao("VOLTAR", visualBotao, fonteTexto, 0, 0, Math.min(200, largInterior / 2), 60, escalaPixel, acaoVoltar);
         painelPrincipal.addAncorado(botaoVoltar, Ancora.INFERIOR_CENTRO, 0, 0);
 
         gerenciadorUI.addCamada(painelPrincipal, GerenciadorUI.CAMADA_UI);
@@ -253,17 +261,21 @@ public class MundoMenu implements Screen, InputProcessor {
     }
 
     public void criarDialogos() {
+        float telaV = Gdx.graphics.getWidth();
+        float telaH = Gdx.graphics.getHeight();
+
         // dialogo de criação de mundo
         dialogoCriar = new CaixaDialogo(visualJanela, fonteTexto, escalaPixel, pincelFormas);
-        dialogoCriar.largura = 500;
-        dialogoCriar.altura = 380;
+        dialogoCriar.largura = Math.min(500, telaV - 40);
+        dialogoCriar.altura = Math.min(380, telaH - 40);
 
-        campoNome = new CampoTexto(visualBotao, fonteTexto, 50, 240, 400, 50, escalaPixel);
+        float largCampo = dialogoCriar.largura - 100;
+        campoNome = new CampoTexto(visualBotao, fonteTexto, 50, 240, largCampo, 50, escalaPixel);
         campoNome.padrao = "Nome do Mundo";
         campoNome.limiteCaracteres = 30;
         dialogoCriar.add(campoNome);
 
-        campoSemente = new CampoTexto(visualBotao, fonteTexto, 50, 160, 400, 50, escalaPixel);
+        campoSemente = new CampoTexto(visualBotao, fonteTexto, 50, 160, largCampo, 50, escalaPixel);
         campoSemente.padrao = "Semente(opcional)";
         campoSemente.limiteCaracteres = 10;
         dialogoCriar.add(campoSemente);
@@ -295,8 +307,8 @@ public class MundoMenu implements Screen, InputProcessor {
 
         // dialogo de confirmação de exclusão
         dialogoConfirmarExcluir = new CaixaDialogo(visualJanela, fonteTexto, escalaPixel, pincelFormas);
-        dialogoConfirmarExcluir.largura = 460;
-        dialogoConfirmarExcluir.altura = 220;
+        dialogoConfirmarExcluir.largura = Math.min(460, telaV - 40);
+        dialogoConfirmarExcluir.altura = Math.min(220, telaH - 40);
 
         Acao acaoConfirmarExcluir = new Acao() {
             public void exec() {

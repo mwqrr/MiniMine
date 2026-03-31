@@ -43,6 +43,11 @@ public class Inventario {
     }
 
     public void aoAjustar(int v, int h) {
+        // escala o tamanho dos slots se a hotbar ficaria maior que 85% da tela
+        int tamBase = 64 + 16;
+        int tamMax = (int)(v * 0.85f / hotbarSlots);
+        tamSlot = Math.min(tamBase, tamMax);
+
         invX = v / 2 - (slotsH * tamSlot) / 2;
         invY = h / 2 - (slotsV * tamSlot) / 2;
 

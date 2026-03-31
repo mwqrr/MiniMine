@@ -93,19 +93,28 @@ public class Config implements Screen, InputProcessor {
     }
 
     public void criarInterface() {
-        painelPrincipal = new Painel(visualJanela, -350, -350, 700, 700, escalaPixel);
+        float telaV = Gdx.graphics.getWidth();
+        float telaH = Gdx.graphics.getHeight();
+        float largPainel = Math.min(700, telaV - 20);
+        float altPainel = Math.min(700, telaH - 20);
+
+        painelPrincipal = new Painel(visualJanela, -largPainel / 2, -altPainel / 2, largPainel, altPainel, escalaPixel);
         painelPrincipal.defEspaco(20, 30);
 
+        float largInterior = largPainel - 40;
+
         Rotulo titulo = new Rotulo("CONFIGURACOES", fonteTitulo, escalaPixel);
-        titulo.largura = 660;
+        titulo.largura = largInterior;
         titulo.altura = 60;
         painelPrincipal.addAncorado(titulo, Ancora.SUPERIOR_CENTRO, 0, 0);
 
         // painel rolavel ocupa o espaco entre o titulo e o botao voltar
-        PainelRolavel painelOpcoes = new PainelRolavel(20, 80, 660, 530);
+        float altOpcoes = altPainel - 170;
+        PainelRolavel painelOpcoes = new PainelRolavel(20, 80, largInterior, altOpcoes);
         painelOpcoes.defEspaco(0.5f);
 
-        float larguraItem = 650;
+        float larguraItem = largInterior - 10;
+
         float alturaItem = 75;
         float espacamento = 6;
         float escalaItem = escalaPixel * 0.75f;

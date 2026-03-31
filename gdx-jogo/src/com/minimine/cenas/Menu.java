@@ -145,12 +145,17 @@ public class Menu implements Screen, InputProcessor {
     }
 
     public void criarPainelMenu() {
-        painelMenu = new Painel(visualJanela, -300, -250, 600, 500, escalaPixel);
+        float telaV = Gdx.graphics.getWidth();
+        float telaH = Gdx.graphics.getHeight();
+        float largPainel = Math.min(600, telaV - 40);
+        float altPainel = Math.min(500, telaH - 40);
+
+        painelMenu = new Painel(visualJanela, -largPainel / 2, -altPainel / 2, largPainel, altPainel, escalaPixel);
         painelMenu.defEspaco(20, 30);
         painelMenu.corFundo = new Color(0.1f, 0.15f, 0.2f, 1f);
 
         Rotulo titulo = new Rotulo("MiniMine", fonte, escalaPixel * 1.2f);
-        titulo.largura = 560;
+        titulo.largura = largPainel - 40;
         titulo.altura = 80;
         painelMenu.addAncorado(titulo, Ancora.SUPERIOR_CENTRO, 0, 0);
 
@@ -160,7 +165,7 @@ public class Menu implements Screen, InputProcessor {
         rotuloVersao.altura = 30;
         painelMenu.addAncorado(rotuloVersao, Ancora.INFERIOR_ESQUERDO, 5, 5);
 
-        float larguraBotao = 400;
+        float larguraBotao = Math.min(400, largPainel - 80);
         float alturaBotao = 70;
 
         Acao acaoJogar = new Acao() {
@@ -188,7 +193,7 @@ public class Menu implements Screen, InputProcessor {
 					});
             }
         };
-        Botao botaoSair = new Botao("Sair", visualBotao, fonte, 0, 0, 200, 60, escalaPixel, acaoSair);
+        Botao botaoSair = new Botao("Sair", visualBotao, fonte, 0, 0, Math.min(200, larguraBotao), 60, escalaPixel, acaoSair);
         painelMenu.addAncorado(botaoSair, Ancora.INFERIOR_CENTRO, 0, 0);
     }
 

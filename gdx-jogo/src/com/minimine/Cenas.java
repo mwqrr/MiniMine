@@ -8,9 +8,8 @@ import com.minimine.cenas.Intro;
 import com.minimine.cenas.Config;
 
 public class Cenas {
-	// instanciação lazy: cria cada tela somente quando for usada
-	// economiza memória em dispositivos com pouca RAM(Galaxy Pocket Neo, etc)
-	public static Screen intro, menu, jogo, selecao, configuracoes;
+	// cria novas instâncias a cada navegação pra evitar reusar telas já disposed
+	public static Screen intro;
 
 	public static Screen obterIntro() {
 		if(intro == null) intro = new Intro();
@@ -18,23 +17,19 @@ public class Cenas {
 	}
 
 	public static Screen obterMenu() {
-		if(menu == null) menu = new Menu();
-		return menu;
+		return new Menu();
 	}
 
 	public static Screen obterJogo() {
-		if(jogo == null) jogo = new Jogo();
-		return jogo;
+		return new Jogo();
 	}
 
 	public static Screen obterSelecao() {
-		if(selecao == null) selecao = new MundoMenu();
-		return selecao;
+		return new MundoMenu();
 	}
 
 	public static Screen obterConfiguracoes() {
-		if(configuracoes == null) configuracoes = new Config();
-		return configuracoes;
+		return new Config();
 	}
 
 	static {
